@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+<body>
+    <h2>localStorage</h2>
+    <button onClick="saveData()">点我保存一个数据</button>
+    <button onClick="readData()">点我读取一个数据</button>
+    <button onClick="deleteData()">点我删除一个数据</button>
+    <button onClick="deleteAllData()">点我清空数据</button>
+</body>
+<script>
+    let p = {name: '张三', age: 18}
+    function saveData() {
+        // 值为字符串
+        localStorage.setItem('msg','hello')
+        // 值为数字(自动转为字符串)
+        localStorage.setItem('msg2', 666)
+        // 值为对象(调用对象的toString方法)
+        localStorage.setItem('person', p)
+        // 正确的对象存储方式
+        localStorage.setItem('person2', JSON.stringify(p))
+    }
+    function readData() {
+        console.log(localStorage.getItem('msg'))
+        console.log(localStorage.getItem('msg2'))
+        console.log(JSON.parse(localStorage.getItem('person2')))
+    }
+    function deleteData() {
+        localStorage.removeItem('msg2')
+    }
+    function deleteAllData() {
+        localStorage.clear()
+    }
+</script>
+</html>
