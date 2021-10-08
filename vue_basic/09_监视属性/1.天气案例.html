@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 准备容器 -->
+    <div id="root">
+        <h2>今天天气很{{isHost1 ? '炎热' : '凉爽'}}</h2>
+        <button @click="changeWeather1">切换天气</button><br/>
+        <h2>今天天气很{{info}}</h2>
+        <!-- <button @click="changeWeather2">切换天气</button> -->
+        <!-- 绑定事件的时候: @xxx="yyy" yyy可以写一些简单的语句 -->
+        <button @click="isHost2 = !isHost2">切换天气</button>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHost1: true,
+            isHost2: true
+        },
+        methods: {
+            // 方式一
+            changeWeather1(){
+                this.isHost1 = !this.isHost1
+            },
+            changeWeather2(){
+                this.isHost2 = !this.isHost2
+            }
+        },
+        computed:{
+            info(){
+                return this.isHost2 ? '炎热' : '凉爽';
+            }
+        }
+    })
+</script>
+</html>

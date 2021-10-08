@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">点我创建一个输入框</button>
+    <script type="text/javascript">
+        const btn = document.getElementById('btn')
+        btn.onclick = ()=>{
+            const input = document.createElement('input')
+            // 以下这两行代码在元素还未放到页面上也可以生效
+            input.className = 'demo'
+            input.value = 99
+            document.body.appendChild(input)
+            // 如下两行代码一定要放在元素已经在页面了之后,否则不生效
+            input.focus()
+            input.parentElement.style.backgroundColor = 'skyblue'
+        }
+    </script>
+</body>
+</html>

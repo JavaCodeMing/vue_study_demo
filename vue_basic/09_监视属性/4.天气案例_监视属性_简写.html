@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例_监视属性_简写</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备容器 -->
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHost: true
+        },
+        methods: {
+            changeWeather() {
+                this.isHost = !this.isHost
+            }
+        },
+        computed: {
+            info() {
+                return this.isHost ? '炎热' : '凉爽';
+            }
+        },
+        watch: {
+            // 正常写法
+            /* isHost: {
+                // 初始化时让handler调用一下
+                //immediate: true,
+                // 深度监视
+                //deep: true,
+                // handler什么时候调用?当isHost发生变化时
+                handler(newValue, oldValue) {
+                    console.log('isHost被修改了', newValue, oldValue)
+                }
+            }, */
+            // 简写
+            /* isHost(newValue, oldValue){
+                console.log('isHost被修改了', newValue, oldValue)
+            } */
+        }
+    })
+    // 正常写法
+    /* vm.$watch('info', {
+        // 初始化时让handler调用一下
+        immediate: true,
+        // handler什么时候调用?当isHost发生变化时
+        handler(newValue, oldValue) {
+            console.log('isHost被修改了', newValue, oldValue)
+        }
+    }) */
+    // 注意使用普通函数写法(this->Vue),不要使用箭头函数(this->window)
+    vm.$watch('info',function(newValue, oldValue){
+        console.log('isHost被修改了', newValue, oldValue)
+    })
+
+</script>
+
+</html>

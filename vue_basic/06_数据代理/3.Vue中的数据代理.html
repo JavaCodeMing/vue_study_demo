@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的数据代理</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<!-- Vue中的数据代理的流程: -->
+<!-- 1.创建Vue实例对象,解析模板代码,将数据挂载到模板中,再渲染页面 -->
+<!-- 2.在浏览器控制台,使用Vue实例对象vm获取定义的属性的值(vm._data.xxx),会调用getter方法 -->
+<!-- 2.1.Vue使用数据代理,将vm._data.xxx劫持后放到的Vue实例下vm.xxx,因此在模板中使用时直接xxx,而不用_data.xxx -->
+<!-- 3.在浏览器控制台,使用Vue实例对象vm修改定义的属性的值(vm._data.xxx),会调用setter方法 -->
+<!-- 3.1.Vue使用数据代理,将vm._data.xxx劫持后放到的Vue实例下vm.xxx -->
+<!-- 3.2.Vue中数据代理真实数据是vm._data.xxx,但无论修改的是vm._data.xxx或vm.xxx,另一个都会修改 -->
+<!-- 4.基本原理:
+        通过Object.defineProperty()把data对象中所有属性添加到vm;
+        为每一个添加到vm上的属性,都指定一个getter/setter
+        在getter/setter内部去操作(读/写)data中对应的属性
+-->
+<body>
+    <!-- 准备容器 -->
+    <div id="root">
+        <h2>学校名称: {{name}}</h2>
+        <h2>学校地址: {{address}}</h2>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '尚硅谷',
+            address: '宏福科技园'
+        },
+    })
+</script>
+</html>
